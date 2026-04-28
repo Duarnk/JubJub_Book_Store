@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shopping Cart | JUBJUB BOOK STORE</title>
+  <link rel="stylesheet" href="css/global.css" />
+  <link rel="stylesheet" href="css/cart.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="navbar-brand">
+      <a href="main.html" class="brand-logo">JUBJUB BOOK STORE</a>
+    </div>
+    <nav class="navbar-links">
+      <a href="main.html" class="nav-link">Home</a>
+      <a href="search.html" class="nav-link">Search Books</a>
+      <a href="team.html" class="nav-link">Our Team</a>
+      <a href="user-login.html" class="nav-btn-login">Login</a>
+      <a href="admin-login.html" class="nav-btn-login">Admin</a>
+    </nav>
+    <button class="hamburger" id="hamburgerBtn" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <nav class="mobile-menu" id="mobileMenu">
+    <a href="main.html">Home</a>
+    <a href="search.html">Search Books</a>
+    <a href="team.html">Our Team</a>
+    <a href="user-login.html">Login</a>
+    <a href="admin-login.html">Admin Login</a>
+  </nav>
+
+  <section class="page-header">
+    <h1>🛒 Shopping Cart</h1>
+    <p>Books you have selected</p>
+  </section>
+
+  <main>
+    <section id="cart-section">
+      <div class="section-inner">
+        <h2 class="section-title">Items in Cart</h2>
+        <div id="cart-loading">Loading...</div>
+        <div id="cart-empty" class="hidden">
+          <p>Your cart is empty.</p>
+          <a href="search.html" class="btn-primary">Browse Books →</a>
+        </div>
+        <div id="cart-list" class="hidden"></div>
+        <div id="cart-summary" class="hidden">
+          <div>
+            <div id="summary-count"></div>
+            <div id="summary-total"></div>
+          </div>
+          <div style="display:flex; gap:0.75rem; flex-wrap:wrap;">
+            <a href="search.html" class="btn-outline">Add More Books</a>
+            <a href="checkout.html" class="btn-primary">Checkout →</a>
+          </div>
+        </div>
+
+        <!-- link to order history -->
+        <p style="margin-top:1rem; font-size:0.88rem; color:var(--color-text-muted);">
+          <a href="orders.html" style="color:var(--color-primary); font-weight:600;">📋 View Order History</a>
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <span class="brand-logo">JUBJUB BOOK STORE</span>
+        <p>Your online bookstore for everyone.</p>
+      </div>
+      <nav class="footer-links">
+        <a href="main.html">Home</a>
+        <a href="search.html">Search Books</a>
+        <a href="team.html">Our Team</a>
+        <a href="user-login.html">Login</a>
+      </nav>
+      <p id="footer-copy">&copy; 2026 JUBJUB BOOK STORE — ITCS223 Project</p>
+    </div>
+  </footer>
+
+  <script src="js/navbar.js"></script>
+  <script src="js/cart.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Checkout | JUBJUB BOOK STORE</title>
+  <link rel="stylesheet" href="css/global.css"/>
+  <link rel="stylesheet" href="css/cart.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="navbar-brand">
+      <a href="main.html" class="brand-logo">JUBJUB BOOK STORE</a>
+    </div>
+    <nav class="navbar-links">
+      <a href="main.html" class="nav-link">Home</a>
+      <a href="search.html" class="nav-link">Search Books</a>
+      <a href="team.html" class="nav-link">Our Team</a>
+      <a href="user-login.html" class="nav-btn-login">Login</a>
+      <a href="admin-login.html" class="nav-btn-login">Admin</a>
+    </nav>
+    <button class="hamburger" id="hamburgerBtn"><span></span><span></span><span></span></button>
+  </header>
+
+  <nav class="mobile-menu" id="mobileMenu">
+    <a href="main.html">Home</a>
+    <a href="search.html">Search Books</a>
+    <a href="team.html">Our Team</a>
+    <a href="user-login.html">Login</a>
+  </nav>
+
+  <section class="page-header">
+    <h1>Checkout</h1>
+    <p>Confirm your order and enter your shipping address</p>
+  </section>
+
+  <main>
+    <section id="cart-section">
+      <div class="section-inner" style="max-width:800px;">
+
+        <!-- Order Summary -->
+        <h2 class="section-title">Order Summary</h2>
+        <div id="checkout-loading">Loading...</div>
+        <div id="checkout-list" class="hidden"></div>
+
+        <div id="checkout-form-section" class="hidden">
+          <!-- Total -->
+          <div id="cart-summary" style="margin-bottom:1.5rem;">
+            <div>
+              <div id="summary-count"></div>
+              <div id="summary-total"></div>
+            </div>
+          </div>
+
+          <!-- Shipping Address Form -->
+          <div style="background:var(--color-surface); border:1.5px solid var(--color-border); border-radius:var(--radius); padding:2rem; margin-bottom:1.5rem;">
+            <h3 style="font-family:var(--font-display); margin-bottom:1.25rem;">📦 Shipping Address</h3>
+
+            <div class="form-group">
+              <label for="checkoutAddress">Address *</label>
+              <input type="text" id="checkoutAddress" placeholder="House number, street, district, city" required />
+            </div>
+
+            <div id="checkoutError" style="display:none; background:#fee2e2; color:#b91c1c; padding:0.7rem 1rem; border-radius:8px; font-size:0.88rem; margin-bottom:1rem;"></div>
+
+            <button class="btn-primary" onclick="doCheckout()" style="width:100%; padding:1rem; font-size:1rem; border-radius:10px;">
+              ✅ Confirm Order
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <span class="brand-logo">JUBJUB BOOK STORE</span>
+        <p>Your online bookstore for everyone.</p>
+      </div>
+      <nav class="footer-links">
+        <a href="main.html">Home</a>
+        <a href="search.html">Search Books</a>
+        <a href="team.html">Our Team</a>
+        <a href="user-login.html">Login</a>
+      </nav>
+      <p id="footer-copy">&copy; 2026 JUBJUB BOOK STORE</p>
+    </div>
+  </footer>
+
+  <script>
+    const API_URL = 'http://localhost:3000';
+
+    function getToken() { return sessionStorage.getItem('userToken') || ''; }
+
+    window.addEventListener('DOMContentLoaded', async () => {
+      const token = getToken();
+      if (!token) { window.location.href = 'user-login.html'; return; }
+
+      try {
+        const res  = await fetch(`${API_URL}/api/cart`, { headers: { 'Authorization': `Bearer ${token}` } });
+        const data = await res.json();
+
+        document.getElementById('checkout-loading').classList.add('hidden');
+
+        if (!data.cart || data.cart.length === 0) {
+          document.getElementById('checkout-list').innerHTML = '<p style="color:var(--color-text-muted);">Your cart is empty. <a href="search.html">Browse Books →</a></p>';
+          document.getElementById('checkout-list').classList.remove('hidden');
+          return;
+        }
+
+        // Display items
+        const list = document.getElementById('checkout-list');
+        list.classList.remove('hidden');
+        data.cart.forEach(item => {
+          const row = document.createElement('div');
+          row.className = 'cart-item';
+          row.style.marginBottom = '0.75rem';
+          row.innerHTML = `
+            <div class="cart-info">
+              <p class="cart-title">${item.book_title}</p>
+              <p class="cart-author">${item.author_name || '—'}</p>
+            </div>
+            <div class="cart-qty">Qty: <strong>${item.quantity}</strong></div>
+            <div class="cart-qty">฿${(Number(item.price) * item.quantity).toLocaleString()}</div>
+          `;
+          list.appendChild(row);
+        });
+
+        document.getElementById('summary-count').textContent = `${data.cart.length} item(s)`;
+        document.getElementById('summary-total').innerHTML = `<strong style="font-size:1.3rem; color:var(--color-primary);">Total ฿${Number(data.total).toLocaleString()}</strong>`;
+        document.getElementById('checkout-form-section').classList.remove('hidden');
+        document.getElementById('cart-summary').classList.remove('hidden');
+
+        // Pre-fill address from userData
+        const userData = sessionStorage.getItem('userData');
+        if (userData) {
+          const user = JSON.parse(userData);
+          if (user.address) document.getElementById('checkoutAddress').value = user.address;
+        }
+
+      } catch (err) {
+        document.getElementById('checkout-loading').textContent = 'Unable to load data.';
+      }
+    });
+
+    async function doCheckout() {
+      const token   = getToken();
+      const address = document.getElementById('checkoutAddress').value.trim();
+      const errEl   = document.getElementById('checkoutError');
+      errEl.style.display = 'none';
+
+      if (!address) {
+        errEl.textContent   = 'Please enter your shipping address.';
+        errEl.style.display = 'block';
+        return;
+      }
+
+      try {
+        const res  = await fetch(`${API_URL}/api/checkout`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+          body: JSON.stringify({ address }),
+        });
+        const data = await res.json();
+
+        if (data.success) {
+          window.location.href = `orders.html?new=${data.order_id}`;
+        } else {
+          errEl.textContent   = data.message;
+          errEl.style.display = 'block';
+        }
+      } catch (err) {
+        errEl.textContent   = 'Unable to connect to the server.';
+        errEl.style.display = 'block';
+      }
+    }
+  </script>
+  <script src="js/navbar.js"></script>
+
+</body>
+</html>

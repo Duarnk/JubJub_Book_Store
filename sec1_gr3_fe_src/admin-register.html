@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Create Admin Account | JUBJUB BOOK STORE</title>
+  <link rel="stylesheet" href="css/global.css"/>
+  <link rel="stylesheet" href="css/login.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet"/>
+  <style>
+    body.admin-page #loginBox {
+      border: 3px solid #1a56db;
+      box-shadow: 0 10px 40px rgba(26,86,219,0.15);
+    }
+    body.admin-page #loginBox h1 { color: #1a56db; }
+    .admin-badge {
+      display: inline-block;
+      background: #1a56db;
+      color: white;
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+      letter-spacing: 1px;
+    }
+  </style>
+</head>
+<body class="admin-page">
+
+  <header class="navbar">
+    <div class="navbar-brand">
+      <a href="main.html" class="brand-logo">JUBJUB BOOK STORE</a>
+    </div>
+    <nav class="navbar-links">
+      <a href="main.html" class="nav-link">Home</a>
+      <a href="search.html" class="nav-link">Search Books</a>
+      <a href="team.html" class="nav-link">Our Team</a>
+      <a href="user-login.html" class="nav-btn-login">Login</a>
+      <a href="admin-login.html" class="nav-btn-login">Admin</a>
+    </nav>
+    <button class="hamburger" id="hamburgerBtn">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <nav class="mobile-menu" id="mobileMenu">
+    <a href="main.html">Home</a>
+    <a href="search.html">Search Books</a>
+    <a href="team.html">Our Team</a>
+    <a href="user-login.html">Login</a>
+    <a href="admin-login.html">Admin</a>
+  </nav>
+
+  <main class="login-page">
+    <div id="loginBox">
+
+      <span class="admin-badge">Admin Registration</span>
+      <h1>Create Administrator Account</h1>
+      <p>Create an Admin account for system management.</p>
+
+      <div id="loginError"></div>
+      <div id="registerSuccess" style="display:none; background:#e8f0fe; color:#1a56db; padding:0.7rem 1rem; border-radius:8px; margin-bottom:1rem; font-size:0.88rem;"></div>
+
+      <form id="registerForm" novalidate>
+
+        <div class="form-group">
+          <label for="firstName">First Name *</label>
+          <input type="text" id="firstName" placeholder="First name" required />
+        </div>
+
+        <div class="form-group">
+          <label for="lastName">Last Name *</label>
+          <input type="text" id="lastName" placeholder="Last name" required />
+        </div>
+
+        <div class="form-group">
+          <label for="username">Username *</label>
+          <input type="text" id="username" placeholder="Username" required />
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password *</label>
+          <input type="password" id="password" placeholder="Password" required />
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" placeholder="admin@jubjub.com" />
+        </div>
+
+        <button type="submit" class="btn-primary btn-full">Create Admin Account</button>
+
+      </form>
+
+      <p class="mt-2 text-center" style="font-size:0.85rem;">
+        Already have an account?
+        <a href="admin-login.html" style="color:var(--color-primary); font-weight:600;">Login</a>
+      </p>
+
+      <p class="mt-1 text-center" style="font-size:0.8rem;">
+        <a href="main.html" style="color:var(--color-text-muted);">← Back to Home</a>
+      </p>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <span class="brand-logo">JUBJUB BOOK STORE</span>
+        <p>Your online bookstore for everyone.</p>
+      </div>
+      <nav class="footer-links">
+        <a href="main.html">Home</a>
+        <a href="search.html">Search Books</a>
+        <a href="team.html">Our Team</a>
+        <a href="user-login.html">Login</a>
+      </nav>
+      <p id="footer-copy">&copy; 2026 JUBJUB BOOK STORE</p>
+    </div>
+  </footer>
+
+  <script>
+    const registerForm    = document.getElementById('registerForm');
+    const loginError      = document.getElementById('loginError');
+    const registerSuccess = document.getElementById('registerSuccess');
+
+    registerForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      loginError.style.display      = 'none';
+      registerSuccess.style.display = 'none';
+
+      const admin_first_name = document.getElementById('firstName').value.trim();
+      const admin_last_name  = document.getElementById('lastName').value.trim();
+      const username         = document.getElementById('username').value.trim();
+      const password         = document.getElementById('password').value.trim();
+      const email            = document.getElementById('email').value.trim();
+
+      if (!admin_first_name || !admin_last_name || !username || !password) {
+        loginError.textContent   = 'Please fill in all required fields.';
+        loginError.style.display = 'block';
+        return;
+      }
+
+      try {
+        const response = await fetch('http://localhost:3000/api/register-admin', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ admin_first_name, admin_last_name, username, password, email }),
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+          registerSuccess.textContent   = 'Admin account created successfully! Redirecting to login...';
+          registerSuccess.style.display = 'block';
+          registerForm.reset();
+          setTimeout(() => window.location.href = 'admin-login.html', 1500);
+        } else {
+          loginError.textContent   = data.message;
+          loginError.style.display = 'block';
+        }
+      } catch (err) {
+        loginError.textContent   = 'Unable to connect to the server.';
+        loginError.style.display = 'block';
+      }
+    });
+
+    document.getElementById('hamburgerBtn').addEventListener('click', () => {
+      document.getElementById('mobileMenu').classList.toggle('open');
+    });
+  </script>
+  <script src="js/navbar.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,190 @@
+/* ============================================
+   cart.css — styles สำหรับ cart.html เท่านั้น
+   ============================================ */
+
+/* id selector */
+#cart-section {
+  padding: 2.5rem 0 4rem;
+}
+
+.section-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* element selector */
+h2.section-title {
+  font-family: var(--font-display);
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: 2rem;
+  position: relative;
+  padding-bottom: 0.75rem;
+}
+
+h2.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 44px; height: 3px;
+  background: var(--color-primary);
+  border-radius: 2px;
+}
+
+/* ============================================
+   CART ITEMS
+   ============================================ */
+
+/* id selector */
+#cart-loading {
+  text-align: center;
+  padding: 3rem;
+  color: var(--color-text-muted);
+}
+
+#cart-empty {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: var(--color-text-muted);
+}
+
+#cart-empty p {
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+}
+
+/* class selector */
+.cart-item {
+  background: var(--color-surface);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+  transition: box-shadow var(--transition), border-color var(--transition);
+}
+
+.cart-item:hover {
+  box-shadow: var(--shadow-sm);
+  border-color: var(--color-primary);
+}
+
+/* class selector */
+.cart-cover {
+  width: 70px;
+  height: 95px;
+  border-radius: 6px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: flex-end;
+  padding: 0.5rem;
+  font-family: var(--font-display);
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: rgba(255,255,255,0.9);
+}
+
+.cart-info {
+  flex: 1;
+}
+
+.cart-title {
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--color-text);
+  margin-bottom: 0.2rem;
+}
+
+.cart-author {
+  font-size: 0.82rem;
+  color: var(--color-text-muted);
+  margin-bottom: 0.4rem;
+}
+
+.cart-price {
+  font-weight: 700;
+  color: var(--color-primary);
+  font-size: 1rem;
+}
+
+/* class selector */
+.cart-qty {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+}
+
+/* id selector */
+.cart-remove {
+  background: #fee2e2;
+  color: #b91c1c;
+  border: none;
+  padding: 0.4rem 0.85rem;
+  border-radius: 8px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: var(--font-body);
+  transition: opacity var(--transition);
+  flex-shrink: 0;
+}
+
+.cart-remove:hover { opacity: 0.75; }
+
+/* class selector — qty buttons */
+.qty-btn {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  border: 1.5px solid var(--color-border);
+  background: var(--color-bg);
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background var(--transition), border-color var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.qty-btn:hover {
+  background: var(--color-primary-light);
+  border-color: var(--color-primary);
+}
+
+/* ============================================
+   CART SUMMARY
+   ============================================ */
+
+/* id selector */
+#cart-summary {
+  background: var(--color-surface);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 1.5rem 2rem;
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+#summary-total {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+#summary-count {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  margin-top: 0.2rem;
+}

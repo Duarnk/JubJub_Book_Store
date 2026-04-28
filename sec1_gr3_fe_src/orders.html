@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Order History | JUBJUB BOOK STORE</title>
+  <link rel="stylesheet" href="css/global.css"/>
+  <link rel="stylesheet" href="css/cart.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="navbar-brand">
+      <a href="main.html" class="brand-logo">JUBJUB BOOK STORE</a>
+    </div>
+    <nav class="navbar-links">
+      <a href="main.html" class="nav-link">Home</a>
+      <a href="search.html" class="nav-link">Search Books</a>
+      <a href="team.html" class="nav-link">Our Team</a>
+      <a href="user-login.html" class="nav-btn-login">Login</a>
+      <a href="admin-login.html" class="nav-btn-login">Admin</a>
+    </nav>
+    <button class="hamburger" id="hamburgerBtn"><span></span><span></span><span></span></button>
+  </header>
+
+  <nav class="mobile-menu" id="mobileMenu">
+    <a href="main.html">Home</a>
+    <a href="search.html">Search Books</a>
+    <a href="team.html">Our Team</a>
+    <a href="user-login.html">Login</a>
+  </nav>
+
+  <section class="page-header">
+    <h1>Order History</h1>
+    <p>All of your orders</p>
+  </section>
+
+  <main>
+    <section id="cart-section">
+      <div class="section-inner" style="max-width:800px;">
+
+        <!-- success message -->
+        <div id="successMsg" class="hidden" style="background:#e8f5e9; color:#2e7d32; padding:1rem 1.5rem; border-radius:10px; margin-bottom:1.5rem; font-weight:600;">
+          Order placed successfully! Thank you for your purchase.
+        </div>
+
+        <h2 class="section-title">Your Orders</h2>
+
+        <div id="orders-loading">Loading...</div>
+        <div id="orders-empty" class="hidden text-center" style="padding:3rem; color:var(--color-text-muted);">
+          You have no order history yet.
+          <br/><a href="search.html" class="btn-primary" style="display:inline-block; margin-top:1rem;">Browse Books →</a>
+        </div>
+        <div id="orders-list" class="hidden"></div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <span class="brand-logo">JUBJUB BOOK STORE</span>
+        <p>Your online bookstore for everyone.</p>
+      </div>
+      <nav class="footer-links">
+        <a href="main.html">Home</a>
+        <a href="search.html">Search Books</a>
+        <a href="team.html">Our Team</a>
+        <a href="user-login.html">Login</a>
+      </nav>
+      <p id="footer-copy">&copy; 2026 JUBJUB BOOK STORE</p>
+    </div>
+  </footer>
+
+  <script>
+    const API_URL = 'http://localhost:3000';
+    function getToken() { return sessionStorage.getItem('userToken') || ''; }
+
+    window.addEventListener('DOMContentLoaded', async () => {
+      const token = getToken();
+      if (!token) { window.location.href = 'user-login.html'; return; }
+
+      // Show success message if redirected from checkout
+      const params = new URLSearchParams(window.location.search);
+      if (params.get('new')) {
+        document.getElementById('successMsg').classList.remove('hidden');
+      }
+
+      try {
+        const res  = await fetch(`${API_URL}/api/orders`, { headers: { 'Authorization': `Bearer ${token}` } });
+        const data = await res.json();
+
+        document.getElementById('orders-loading').classList.add('hidden');
+
+        if (!data.orders || data.orders.length === 0) {
+          document.getElementById('orders-empty').classList.remove('hidden');
+          return;
+        }
+
+        const list = document.getElementById('orders-list');
+        list.classList.remove('hidden');
+
+        data.orders.forEach(order => {
+          const statusColor = order.status === 'pending' ? '#f59e0b' : '#22c55e';
+          const statusText  = order.status === 'pending' ? 'Pending' : 'Completed';
+          const date = new Date(order.ordered_at).toLocaleDateString('en-US', {
+            year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit'
+          });
+
+          const card = document.createElement('div');
+          card.style.cssText = 'background:var(--color-surface); border:1.5px solid var(--color-border); border-radius:var(--radius); padding:1.5rem; margin-bottom:1.25rem;';
+
+          let itemsHTML = order.items.map(item => `
+            <div style="display:flex; justify-content:space-between; padding:0.4rem 0; border-bottom:1px solid var(--color-border); font-size:0.9rem;">
+              <span>${item.book_title} × ${item.quantity}</span>
+              <span style="font-weight:600;">฿${(Number(item.price) * item.quantity).toLocaleString()}</span>
+            </div>
+          `).join('');
+
+          card.innerHTML = `
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; flex-wrap:wrap; gap:0.5rem;">
+              <div>
+                <span style="font-weight:700; font-size:1rem;">Order #${order.order_id}</span>
+                <p style="font-size:0.82rem; color:var(--color-text-muted); margin-top:0.2rem;">${date}</p>
+              </div>
+              <span style="background:${statusColor}22; color:${statusColor}; padding:0.3rem 0.85rem; border-radius:20px; font-size:0.82rem; font-weight:700;">${statusText}</span>
+            </div>
+            <div style="margin-bottom:1rem;">${itemsHTML}</div>
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem;">
+              <span style="font-size:0.85rem; color:var(--color-text-muted);">📦 ${order.address}</span>
+              <span style="font-weight:700; color:var(--color-primary); font-size:1.1rem;">Total ฿${Number(order.total).toLocaleString()}</span>
+            </div>
+          `;
+          list.appendChild(card);
+        });
+
+      } catch (err) {
+        document.getElementById('orders-loading').textContent = 'Unable to load orders.';
+      }
+    });
+  </script>
+  <script src="js/navbar.js"></script>
+
+</body>
+</html>

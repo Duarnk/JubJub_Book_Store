@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Login | JUBJUB BOOK STORE</title>
+
+  <link rel="stylesheet" href="css/global.css"/>
+  <link rel="stylesheet" href="css/login.css"/>
+
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet"/>
+  
+  <style>
+    body.admin-page {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    }
+    body.admin-page .login-page {
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    }
+    body.admin-page #loginBox {
+      background: white;
+      border: 3px solid #c8564a;
+      box-shadow: 0 10px 40px rgba(200, 86, 74, 0.2);
+    }
+    body.admin-page #loginBox h1 {
+      color: #c8564a;
+    }
+    body.admin-page .admin-badge {
+      display: inline-block;
+      background: #c8564a;
+      color: white;
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+  </style>
+</head>
+<body class="admin-page">
+
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="navbar-brand">
+      <a href="main.html" class="brand-logo">JUBJUB BOOK STORE</a>
+    </div>
+
+    <nav class="navbar-links">
+      <a href="main.html" class="nav-link">Home</a>
+      <a href="search.html" class="nav-link">Search Books</a>
+      <a href="team.html" class="nav-link">Our Team</a>
+      <a href="user-login.html" class="nav-btn-login">Login</a>
+      <a href="admin-login.html" class="nav-btn-login active">Admin</a>
+    </nav>
+
+    <button class="hamburger" id="hamburgerBtn">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <!-- MOBILE MENU -->
+  <nav class="mobile-menu" id="mobileMenu">
+    <a href="main.html">Home</a>
+    <a href="search.html">Search Books</a>
+    <a href="team.html">Our Team</a>
+    <a href="admin-login.html">Admin Login</a>
+    <a href="user-login.html">Login</a>
+  </nav>
+
+  <!-- LOGIN -->
+  <main class="login-page">
+    <div id="loginBox">
+
+      <span class="admin-badge">Admin Portal</span>
+      <h1>Administrator Login</h1>
+      <p>This login is for authorized administrators only.</p>
+
+      <!-- ERROR -->
+      <div id="loginError">Invalid username or password.</div>
+
+      <!-- FORM -->
+      <form id="loginForm" novalidate>
+
+        <div class="form-group">
+          <label>Username</label>
+          <input type="text" id="username" placeholder="Enter your username" required />
+        </div>
+
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" id="password" placeholder="Enter your password" required />
+        </div>
+
+        <button type="submit" class="btn-primary btn-full" id="loginBtn">
+          Login
+        </button>
+
+      </form>
+
+      <!-- REGISTER -->
+      <p class="mt-2 text-center" style="font-size:0.85rem;">
+        Don't have an account?
+        <a href="admin-register.html" style="color:var(--color-primary); font-weight:600;">
+          Register
+        </a>
+      </p>
+
+      <!-- BACK -->
+      <p class="mt-1 text-center" style="font-size:0.8rem;">
+        <a href="main.html" style="color:var(--color-text-muted);">← Back to Home</a>
+      </p>
+
+      <!-- TEST USER -->
+      <p style="font-size:0.75rem; color:gray; margin-top:10px; text-align:center;">
+        Test account: admin (password: 1234)
+      </p>
+
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <span class="brand-logo">JUBJUB BOOK STORE</span>
+        <p>Your online bookstore for everyone.</p>
+      </div>
+
+      <nav class="footer-links">
+        <a href="main.html">Home</a>
+        <a href="search.html">Search Books</a>
+        <a href="team.html">Our Team</a>
+        <a href="admin-login.html">Admin Login</a>
+      </nav>
+
+      <p class="footer-copy">&copy; 2026 JUBJUB BOOK STORE</p>
+    </div>
+  </footer>
+
+  <script src="js/login-admin.js"></script>
+
+  <script>
+    document.getElementById('hamburgerBtn')
+      .addEventListener('click', () => {
+        document.getElementById('mobileMenu').classList.toggle('open');
+      });
+  </script>
+
+</body>
+</html>

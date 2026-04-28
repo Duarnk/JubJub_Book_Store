@@ -1,0 +1,177 @@
+/* ============================================
+   management.css — styles สำหรับ management.html
+   ============================================ */
+
+/* id selector */
+#mgmt-wrapper {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 2rem;
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+/* ============================================
+   FORM PANEL
+   ============================================ */
+
+/* id selector */
+#mgmt-form-panel {
+  background: var(--color-surface);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 1.75rem;
+  box-shadow: var(--shadow-sm);
+  position: sticky;
+  top: 80px;
+}
+
+#mgmt-form-panel h2 {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  margin-bottom: 1.25rem;
+  color: var(--color-text);
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid var(--color-primary-light);
+}
+
+/* id selector */
+#mgmt-msg {
+  padding: 0.65rem 1rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+}
+
+/* class selector */
+.form-group { margin-bottom: 0.85rem; }
+
+.form-group label {
+  display: block;
+  font-weight: 600;
+  font-size: 0.82rem;
+  margin-bottom: 0.35rem;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+textarea { resize: vertical; min-height: 75px; }
+
+.form-actions { display: flex; gap: 0.75rem; margin-top: 0.75rem; }
+
+/* ============================================
+   LIST PANEL
+   ============================================ */
+
+/* id selector */
+#mgmt-list-panel {
+  background: var(--color-surface);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 1.75rem;
+  box-shadow: var(--shadow-sm);
+}
+
+#mgmt-list-panel h2 {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  margin-bottom: 1.25rem;
+  color: var(--color-text);
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid var(--color-primary-light);
+}
+
+/* class selector */
+.mgmt-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+/* element selectors */
+th {
+  background: #1a3a7a;
+  color: #e8f0fe;
+  padding: 0.75rem 0.85rem;
+  text-align: left;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+
+td {
+  padding: 0.65rem 0.85rem;
+  border-bottom: 1px solid var(--color-border);
+  color: var(--color-text);
+  vertical-align: middle;
+}
+
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: var(--color-primary-light); }
+
+/* class selector */
+.book-type {
+  font-size: 0.7rem;
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+  padding: 0.18rem 0.55rem;
+  border-radius: 20px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* id selector — cover thumbnail in table */
+.cover-thumb {
+  width: 36px;
+  height: 48px;
+  border-radius: 4px;
+  object-fit: cover;
+  display: block;
+}
+
+.cover-thumb-placeholder {
+  width: 36px;
+  height: 48px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+}
+
+/* class selectors */
+.action-btn {
+  padding: 0.25rem 0.6rem;
+  border-radius: 6px;
+  border: none;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: var(--font-body);
+  transition: opacity var(--transition);
+  white-space: nowrap;
+}
+
+.action-btn:hover { opacity: 0.75; }
+
+.action-btn.edit {
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+}
+
+.action-btn.delete {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 900px) {
+  #mgmt-wrapper { grid-template-columns: 1fr; }
+  #mgmt-form-panel { position: static; }
+}

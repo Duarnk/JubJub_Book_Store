@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manage Books | JUBJUB BOOK STORE</title>
+  <link rel="stylesheet" href="css/global.css" />
+  <link rel="stylesheet" href="css/management.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="navbar-brand">
+      <a href="main.html" class="brand-logo">JUBJUB BOOK STORE</a>
+    </div>
+    <nav class="navbar-links">
+      <a href="main.html" class="nav-link">Home</a>
+      <a href="search.html" class="nav-link">Search Books</a>
+      <a href="team.html" class="nav-link">Our Team</a>
+      <a href="admin-login.html" class="nav-btn-login">Logout</a>
+    </nav>
+    <button class="hamburger" id="hamburgerBtn" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <nav class="mobile-menu" id="mobileMenu">
+    <a href="main.html">Home</a>
+    <a href="search.html">Search Books</a>
+    <a href="team.html">Our Team</a>
+    <a href="admin-login.html">Logout</a>
+  </nav>
+
+  <section class="page-header">
+    <h1>Manage Books</h1>
+    <p>Add, edit, and delete books in the system</p>
+  </section>
+
+  <main>
+    <div id="mgmt-wrapper">
+
+      <!-- ===== FORM PANEL ===== -->
+      <section id="mgmt-form-panel">
+        <h2 id="formTitle">➕ Add New Book</h2>
+
+        <div id="mgmt-msg" class="hidden"></div>
+        <input type="hidden" id="editBookId" value="" />
+
+        <!-- COVER PREVIEW -->
+        <div id="cover-preview-wrap" style="text-align:center; margin-bottom:1.25rem;">
+          <div id="cover-preview" style="
+            width:100px; height:140px; border-radius:8px; margin:0 auto 0.75rem;
+            background:linear-gradient(135deg,#1a56db,#0f1e3d);
+            display:flex; align-items:center; justify-content:center;
+            overflow:hidden; border:2px solid var(--color-border);
+          ">
+            <span style="color:rgba(255,255,255,0.5); font-size:2rem;">&#128214;</span>
+          </div>
+          <label for="fCover" style="cursor:pointer;">
+            <span class="btn-outline" style="font-size:0.82rem; padding:0.35rem 1rem;">
+              Select Cover Image
+            </span>
+          </label>
+          <input type="file" id="fCover" accept="image/*" style="display:none;" onchange="previewCover(event)" />
+          <p id="uploadMsg" style="font-size:0.78rem; margin-top:0.4rem; color:var(--color-text-muted);"></p>
+        </div>
+
+        <!-- EXTRA IMAGES (edit mode only) -->
+        <div id="extra-images-section" style="display:none; margin-bottom:1.25rem;">
+          <p style="font-size:0.82rem; font-weight:600; color:var(--color-text-muted); margin-bottom:0.5rem;">Additional Images</p>
+          <div id="extra-images-list" style="display:flex; flex-wrap:wrap; gap:0.5rem; margin-bottom:0.5rem;"></div>
+          <label for="fExtraImage" style="cursor:pointer;">
+            <span class="btn-outline" style="font-size:0.78rem; padding:0.3rem 0.85rem;">
+              Add Another Image
+            </span>
+          </label>
+          <input type="file" id="fExtraImage" accept="image/*" style="display:none;" onchange="uploadExtraImage(event)" />
+        </div>
+
+        <!-- FORM FIELDS — 2 columns -->
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.75rem;">
+
+          <div class="form-group" style="grid-column:1/-1;">
+            <label for="fName">Book Title *</label>
+            <input type="text" id="fName" placeholder="Book title" required />
+          </div>
+
+          <div class="form-group" style="grid-column:1/-1;">
+            <label for="fAuthor">Author *</label>
+            <input type="text" id="fAuthor" placeholder="Author name" required />
+          </div>
+
+          <div class="form-group">
+            <label for="fType">Category *</label>
+            <select id="fType">
+              <option value="novel">Fiction</option>
+              <option value="academic">Academic</option>
+              <option value="children">Children & Youth</option>
+              <option value="lifestyle">Lifestyle</option>
+              <option value="business">Business</option>
+              <option value="comic">Comics</option>
+              <option value="history">History</option>
+              <option value="science">Science</option>
+              <option value="travel">Travel</option>
+              <option value="food">Food & Cooking</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="fPrice">Price (฿) *</label>
+            <input type="number" id="fPrice" placeholder="e.g. 295" min="0" required />
+          </div>
+
+          <div class="form-group">
+            <label for="fISBN">ISBN *</label>
+            <input type="text" id="fISBN" placeholder="978-xxx-xxx-xxx-x" />
+          </div>
+
+          <div class="form-group">
+            <label for="fStock">Stock Quantity</label>
+            <input type="number" id="fStock" placeholder="e.g. 50" min="0" />
+          </div>
+
+          <div class="form-group">
+            <label for="fPublisher">Publisher</label>
+            <input type="text" id="fPublisher" placeholder="Publisher name" />
+          </div>
+
+          <div class="form-group">
+            <label for="fPages">Pages</label>
+            <input type="number" id="fPages" placeholder="e.g. 320" min="1" />
+          </div>
+
+          <div class="form-group" style="grid-column:1/-1;">
+            <label for="fDesc">Description</label>
+            <textarea id="fDesc" placeholder="Book description"></textarea>
+          </div>
+
+        </div>
+
+        <div style="display:flex; gap:0.75rem; margin-top:0.5rem;">
+          <button class="btn-primary" id="submitBtn" onclick="submitForm()">✓ Save</button>
+          <button class="btn-outline" id="cancelBtn" onclick="resetForm()" style="display:none;">✕ Cancel</button>
+        </div>
+      </section>
+
+      <!-- ===== LIST PANEL ===== -->
+      <section id="mgmt-list-panel">
+        <h2>All Books</h2>
+
+        <div id="mgmtLoading" style="color:var(--color-text-muted); font-size:0.9rem; padding:1rem 0;">Loading...</div>
+
+        <div id="mgmtTableWrapper" class="hidden" style="overflow-x:auto;">
+          <table class="mgmt-table" id="mgmtTable">
+            <thead>
+              <tr>
+                <th>Cover</th>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th>Stock</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="mgmtBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <span class="brand-logo">JUBJUB BOOK STORE</span>
+        <p>Your online bookstore for everyone.</p>
+      </div>
+      <nav class="footer-links">
+        <a href="main.html">Home</a>
+        <a href="search.html">Search Books</a>
+        <a href="team.html">Our Team</a>
+      </nav>
+      <p id="footer-copy">&copy; 2026 JUBJUB BOOK STORE — ITCS223 Project</p>
+    </div>
+  </footer>
+
+  <script src="js/management.js"></script>
+  <script src="js/navbar.js"></script>
+  <script>
+    window.addEventListener('DOMContentLoaded', loadBooks);
+
+    // Preview image before upload
+    function previewCover(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const preview = document.getElementById('cover-preview');
+        preview.innerHTML = `<img src="${e.target.result}" style="width:100%; height:100%; object-fit:cover;" />`;
+      };
+      reader.readAsDataURL(file);
+      document.getElementById('uploadMsg').textContent = `Selected file: ${file.name}`;
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login | JUBJUB BOOK STORE</title>
+  <link rel="stylesheet" href="css/global.css"/>
+  <link rel="stylesheet" href="css/login.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="navbar-brand">
+      <a href="main.html" class="brand-logo">JUBJUB BOOK STORE</a>
+    </div>
+    <nav class="navbar-links">
+      <a href="main.html" class="nav-link">Home</a>
+      <a href="search.html" class="nav-link">Search Books</a>
+      <a href="team.html" class="nav-link">Our Team</a>
+      <a href="user-login.html" class="nav-btn-login active">Login</a>
+      <a href="admin-login.html" class="nav-btn-login">Admin</a>
+    </nav>
+    <button class="hamburger" id="hamburgerBtn">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <!-- MOBILE MENU -->
+  <nav class="mobile-menu" id="mobileMenu">
+    <a href="main.html">Home</a>
+    <a href="search.html">Search Books</a>
+    <a href="team.html">Our Team</a>
+    <a href="user-login.html">Login</a>
+    <a href="admin-login.html">Admin Login</a>
+  </nav>
+
+  <!-- LOGIN -->
+  <main class="login-page">
+    <div id="loginBox">
+
+      <h1>Member Login</h1>
+      <p>Sign in to access the bookstore</p>
+
+      <!-- id matches login-user.js -->
+      <div id="loginError"></div>
+
+      <form id="loginForm" novalidate>
+
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" id="username" placeholder="Enter your email" required />
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" placeholder="Enter your password" required />
+        </div>
+
+        <button type="submit" class="btn-primary btn-full" id="loginBtn">
+          Login
+        </button>
+
+      </form>
+
+      <p class="mt-2 text-center" style="font-size:0.85rem;">
+        Don't have an account?
+        <a href="user-register.html" style="color:var(--color-primary); font-weight:600;">Register</a>
+      </p>
+
+      <p class="mt-1 text-center" style="font-size:0.8rem;">
+        <a href="main.html" style="color:var(--color-text-muted);">← Back to Home</a>
+      </p>
+
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <span class="brand-logo">JUBJUB BOOK STORE</span>
+        <p>Your online bookstore for everyone.</p>
+      </div>
+      <nav class="footer-links">
+        <a href="main.html">Home</a>
+        <a href="search.html">Search Books</a>
+        <a href="team.html">Our Team</a>
+        <a href="user-login.html">Login</a>
+      </nav>
+      <p id="footer-copy">&copy; 2026 JUBJUB BOOK STORE</p>
+    </div>
+  </footer>
+
+  <script src="js/login-user.js"></script>
+  <script>
+    document.getElementById('hamburgerBtn').addEventListener('click', () => {
+      document.getElementById('mobileMenu').classList.toggle('open');
+    });
+  </script>
+
+</body>
+</html>

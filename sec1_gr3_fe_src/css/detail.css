@@ -1,0 +1,135 @@
+#detail-wrapper {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+#detail-loading {
+  padding: 5rem;
+  text-align: center;
+  color: var(--color-text-muted);
+}
+
+#detail-error {
+  padding: 5rem;
+  text-align: center;
+  color: var(--color-text-muted);
+}
+
+
+.back-bar {
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  padding: 0.75rem 2rem;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--color-primary);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.back-link:hover { text-decoration: underline; }
+
+.detail-layout {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 2.5rem;
+  padding: 3rem 0;
+}
+
+#detail-cover {
+  width: 100%;
+  aspect-ratio: 2/3;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  display: flex;
+  align-items: flex-end;
+  padding: 1.5rem;
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+#detail-source {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  margin-top: 0.75rem;
+  text-align: center;
+  display: block;
+}
+
+
+.detail-info h1 {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  margin-bottom: 0.4rem;
+  line-height: 1.2;
+  color: var(--color-text);
+}
+
+
+.detail-author {
+  color: var(--color-text-muted);
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+.detail-price {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: 1.2rem;
+}
+
+.detail-badge {
+  display: inline-block;
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+  padding: 0.28rem 0.85rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  margin-bottom: 1.1rem;
+}
+
+
+#detail-meta {
+  width: 100%;
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+  border-collapse: collapse;
+}
+
+#detail-meta td {
+  padding: 0.4rem 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+#detail-meta td:first-child {
+  color: var(--color-text-muted);
+  width: 130px;
+}
+
+
+.detail-desc-label {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: var(--color-text);
+}
+
+.detail-desc {
+  color: var(--color-text-muted);
+  font-size: 0.95rem;
+  line-height: 1.8;
+}
+
+@media (max-width: 768px) {
+  .detail-layout { grid-template-columns: 1fr; }
+}

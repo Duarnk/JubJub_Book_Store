@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Book Details | JUBJUB BOOK STORE</title>
+  <link rel="stylesheet" href="css/global.css" />
+  <link rel="stylesheet" href="css/detail.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="navbar-brand">
+      <a href="main.html" class="brand-logo">JUBJUB BOOK STORE</a>
+    </div>
+    <nav class="navbar-links">
+      <a href="main.html" class="nav-link">Home</a>
+      <a href="search.html" class="nav-link">Search Books</a>
+      <a href="team.html" class="nav-link">Our Team</a>
+      <a href="user-login.html" class="nav-btn-login">Login</a>
+      <a href="admin-login.html" class="nav-btn-login">Admin</a>
+    </nav>
+    <button class="hamburger" id="hamburgerBtn" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <!-- MOBILE MENU -->
+  <nav class="mobile-menu" id="mobileMenu">
+    <a href="main.html">Home</a>
+    <a href="search.html">Search Books</a>
+    <a href="team.html">Our Team</a>
+    <a href="user-login.html">Login</a>
+    <a href="admin-login.html">Admin Login</a>
+  </nav>
+
+  <main>
+
+    <!-- LOADING -->
+    <div id="detailLoading" class="text-center" style="padding:5rem; color:var(--color-text-muted);">
+      Loading...
+    </div>
+
+    <!-- ERROR -->
+    <div id="detailError" class="hidden text-center" style="padding:5rem; color:var(--color-text-muted);">
+      Book not found.<br/>
+      <a href="search.html" class="btn-outline" style="display:inline-block; margin-top:1rem;">← Back to Search</a>
+    </div>
+
+    <!-- CONTENT -->
+    <article id="detailContent" class="hidden">
+
+      <!-- BACK BAR -->
+      <div class="back-bar">
+        <a href="search.html" class="back-link">← Back to Search Results</a>
+      </div>
+
+      <div id="detail-wrapper">
+        <div class="detail-layout">
+
+          <!-- COVER -->
+          <div>
+            <div id="detailCover">
+              <span id="detailCoverTitle"></span>
+            </div>
+            <p id="detail-source">Source: JUBJUB BOOK STORE Database</p>
+          </div>
+
+          <!-- INFO -->
+          <div class="detail-info">
+            <span class="detail-badge" id="detailType">—</span>
+            <h1 id="detailTitle">—</h1>
+            <p class="detail-author" id="detailAuthor">—</p>
+            <p class="detail-price" id="detailPrice">—</p>
+
+            <table id="detail-meta">
+              <tr>
+                <td>ISBN</td>
+                <td id="detailISBN">—</td>
+              </tr>
+              <tr>
+                <td>Publisher</td>
+                <td id="detailPublisher">—</td>
+              </tr>
+              <tr>
+                <td>Pages</td>
+                <td id="detailPages">—</td>
+              </tr>
+              <tr>
+                <td>Year</td>
+                <td id="detailYear">—</td>
+              </tr>
+              <tr>
+                <td>In Stock</td>
+                <td id="detailStock">—</td>
+              </tr>
+            </table>
+
+            <p class="detail-desc-label">About This Book</p>
+            <p class="detail-desc" id="detailDesc">—</p>
+
+            <!-- Quantity selector + Add to Cart -->
+            <div style="display:flex; align-items:center; gap:1rem; margin-top:1.5rem; flex-wrap:wrap;">
+              <div style="display:flex; align-items:center; gap:0.5rem;">
+                <button onclick="changeQty(-1)" style="width:32px; height:32px; border-radius:8px; border:1.5px solid var(--color-border); background:var(--color-bg); font-size:1.1rem; cursor:pointer; font-weight:700;">−</button>
+                <input type="number" id="qtyInput" value="1" min="1" style="width:55px; text-align:center; padding:0.4rem; border-radius:8px; border:1.5px solid var(--color-border); font-size:1rem;"/>
+                <button onclick="changeQty(1)" style="width:32px; height:32px; border-radius:8px; border:1.5px solid var(--color-border); background:var(--color-bg); font-size:1.1rem; cursor:pointer; font-weight:700;">+</button>
+              </div>
+              <button class="btn-primary" id="addCartBtn" onclick="addToCart(getBookId())">
+                🛒 Add to Cart
+              </button>
+            </div>
+            <p id="stockWarning" style="color:#ef4444; font-size:0.85rem; margin-top:0.5rem; display:none;">Quantity exceeds available stock.</p>
+          </div>
+
+        </div>
+      </div>
+    </article>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <span class="brand-logo">JUBJUB BOOK STORE</span>
+        <p>Your online bookstore for everyone.</p>
+      </div>
+      <nav class="footer-links">
+        <a href="main.html">Home</a>
+        <a href="search.html">Search Books</a>
+        <a href="team.html">Our Team</a>
+        <a href="user-login.html">Login</a>
+      </nav>
+      <p id="footer-copy">&copy; 2026 JUBJUB BOOK STORE — ITCS223 Project</p>
+    </div>
+  </footer>
+
+  <script src="js/detail.js"></script>
+  <script src="js/navbar.js"></script>
+  <script>
+    document.getElementById('hamburgerBtn').addEventListener('click', () => {
+      document.getElementById('mobileMenu').classList.toggle('open');
+    });
+
+    function getBookId() {
+      return new URLSearchParams(window.location.search).get('id');
+    }
+  </script>
+
+</body>
+</html>
