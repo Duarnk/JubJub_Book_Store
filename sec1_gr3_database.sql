@@ -71,7 +71,7 @@ CREATE TABLE admin (
     admin_first_name VARCHAR(50) NOT NULL,
     admin_last_name  VARCHAR(50) NOT NULL,
     username         VARCHAR(50) UNIQUE NOT NULL,
-    password_hash    VARCHAR(255) NOT NULL,
+    password    VARCHAR(255) NOT NULL,
     email            VARCHAR(100) UNIQUE
 );
 
@@ -167,7 +167,7 @@ INSERT INTO users (first_name, last_name, email, password, phone, address) VALUE
 ('Pim',       'Suayngam',   'pim@email.com',       '1234', '0812345670', '707 Silom Rd, Bangkok');
 
 -- admin (10 rows)
-INSERT INTO admin (admin_first_name, admin_last_name, username, password_hash, email) VALUES
+INSERT INTO admin (admin_first_name, admin_last_name, username, password, email) VALUES
 ('Somsak',    'Phudu',      'admin',     '1234', 'admin@jubjub.com'),
 ('Wanna',     'Jadkan',     'wanna',     '1234', 'wanna@jubjub.com'),
 ('Theerapong','Rabob',      'theera',    '1234', 'theera@jubjub.com'),
