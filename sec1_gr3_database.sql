@@ -57,13 +57,13 @@ CREATE TABLE book_author (
 );
 
 CREATE TABLE users (
-    user_id       INT AUTO_INCREMENT PRIMARY KEY,
-    first_name    VARCHAR(50),
-    last_name     VARCHAR(50),
-    email         VARCHAR(100) UNIQUE,
-    password VARCHAR(255),
-    phone         VARCHAR(10),
-    address       TEXT
+    user_id    INT AUTO_INCREMENT PRIMARY KEY,
+    first_name VARCHAR(50),
+    last_name  VARCHAR(50),
+    email      VARCHAR(100) UNIQUE,
+    password   VARCHAR(255),
+    phone      VARCHAR(10),
+    address    TEXT
 );
 
 CREATE TABLE admin (
@@ -75,7 +75,7 @@ CREATE TABLE admin (
     email            VARCHAR(100) UNIQUE
 );
 
--- login log ของ admin (ตาม spec)
+-- Admin login log
 CREATE TABLE login_logs (
     log_id     INT AUTO_INCREMENT PRIMARY KEY,
     admin_id   INT,
@@ -90,11 +90,11 @@ CREATE TABLE login_logs (
 
 -- publisher (10 rows)
 INSERT INTO publisher (publisher_name, publisher_country) VALUES
-('สำนักพิมพ์นานมีบุ๊คส์',  'Thailand'),
-('สำนักพิมพ์อมรินทร์',      'Thailand'),
-('สำนักพิมพ์แจ่มใส',        'Thailand'),
-('สำนักพิมพ์ผีเสื้อ',        'Thailand'),
-('สำนักพิมพ์ดีเอ็มจี',       'Thailand'),
+('Nanmeebooks Publishing',   'Thailand'),
+('Amarin Printing',          'Thailand'),
+('Jamsai Publishing',        'Thailand'),
+('Butterfly Publishing',     'Thailand'),
+('DMG Publishing',           'Thailand'),
 ('Penguin Random House',     'USA'),
 ('HarperCollins',            'USA'),
 ('Simon & Schuster',         'USA'),
@@ -103,42 +103,42 @@ INSERT INTO publisher (publisher_name, publisher_country) VALUES
 
 -- category (10 rows)
 INSERT INTO category (category_name, category_description) VALUES
-('นิยาย',              'หนังสือนิยายภาษาไทยและแปล'),
-('วิชาการ',            'หนังสือเรียนและตำราวิชาการ'),
-('เด็กและเยาวชน',     'หนังสือสำหรับเด็กและวัยรุ่น'),
-('ไลฟ์สไตล์',         'หนังสือพัฒนาตนเองและการใช้ชีวิต'),
-('ธุรกิจ',             'หนังสือธุรกิจ การเงิน และการลงทุน'),
-('การ์ตูน',            'มังงะและการ์ตูนญี่ปุ่น'),
-('ประวัติศาสตร์',      'หนังสือประวัติศาสตร์และสารคดี'),
-('วิทยาศาสตร์',       'หนังสือวิทยาศาสตร์และเทคโนโลยี'),
-('ท่องเที่ยว',         'คู่มือท่องเที่ยวและแผนที่'),
-('อาหารและการทำอาหาร','ตำราอาหารและสูตรทำอาหาร');
+('Fiction',          'Thai and translated fiction novels'),
+('Academic',         'Textbooks and academic references'),
+('Children & Youth', 'Books for children and teenagers'),
+('Lifestyle',        'Self-improvement and lifestyle books'),
+('Business',         'Business, finance, and investment books'),
+('Comics',           'Manga and Japanese comics'),
+('History',          'History books and documentaries'),
+('Science',          'Science and technology books'),
+('Travel',           'Travel guides and maps'),
+('Food & Cooking',   'Cookbooks and recipes');
 
 -- author (10 rows)
 INSERT INTO author (author_first_name, author_last_name, nationality, biography) VALUES
-('มาลา',    'คำจันทร์',    'Thai',      'นักเขียนนิยายไทยชั้นนำ ผู้ประพันธ์ชั่วฟ้าดินสลาย'),
-('ทมยันตี', '',             'Thai',      'นามปากกาของ คุณหญิงวิมล เจียมเจริญ นักเขียนนิยายรัก'),
-('James',   'Clear',        'American',  'Author of Atomic Habits, expert on habits and decision making'),
-('Robert',  'Kiyosaki',     'American',  'Author of Rich Dad Poor Dad, entrepreneur and investor'),
-('Dale',    'Carnegie',     'American',  'Author of How to Win Friends and Influence People'),
-('Yuval',   'Harari',       'Israeli',   'Historian and author of Sapiens and Homo Deus'),
-('สิริพร',  'วงษ์สวรรค์',   'Thai',      'นักเขียนนิยายแนวโรแมนติกชื่อดัง'),
-('วินทร์',  'เลียววาริณ',   'Thai',      'นักเขียนรางวัลซีไรต์ ผู้ประพันธ์ประชาธิปไตยบนเส้นขนาน'),
-('Paulo',   'Coelho',       'Brazilian', 'Author of The Alchemist and many bestselling novels'),
-('George',  'Orwell',       'British',   'Author of 1984 and Animal Farm');
+('Mala',    'Khamchan',      'Thai',      'Leading Thai fiction writer, author of Chua Fa Din Salai'),
+('Thomayanti', '',           'Thai',      'Pen name of Khunying Wimon Chiamcharoen, romantic fiction writer'),
+('James',   'Clear',         'American',  'Author of Atomic Habits, expert on habits and decision making'),
+('Robert',  'Kiyosaki',      'American',  'Author of Rich Dad Poor Dad, entrepreneur and investor'),
+('Dale',    'Carnegie',      'American',  'Author of How to Win Friends and Influence People'),
+('Yuval',   'Harari',        'Israeli',   'Historian and author of Sapiens and Homo Deus'),
+('Siriporn', 'Wongsawan',    'Thai',      'Well-known Thai romantic fiction writer'),
+('Win',     'Lyovarin',      'Thai',      'SEA Write Award winner, author of Democracy on the Parallel Line'),
+('Paulo',   'Coelho',        'Brazilian', 'Author of The Alchemist and many bestselling novels'),
+('George',  'Orwell',        'British',   'Author of 1984 and Animal Farm');
 
 -- book (10 rows)
 INSERT INTO book (book_title, cover_image, price, stock, description, isbn, pages, publish_date, language, edition, publisher_id, category_id) VALUES
-('ชั่วฟ้าดินสลาย',         NULL, 195.00, 50, 'นิยายอิงประวัติศาสตร์ยุคสงครามโลกครั้งที่สอง',     '978-974-484-001-1', 320, '2010-01-01', 'Thai',    '5th',  1, 1),
-('คืนหนึ่งในปารีส',        NULL, 175.00, 35, 'นิยายรักโรแมนติกในกรุงปารีส',                       '978-974-484-002-2', 280, '2015-06-01', 'Thai',    '3rd',  2, 1),
-('Atomic Habits',           NULL, 295.00, 60, 'How to build good habits and break bad ones',         '978-073-521-122-5', 320, '2018-10-16', 'English', '1st',  6, 4),
-('Rich Dad Poor Dad',       NULL, 245.00, 45, 'What the rich teach their kids about money',          '978-194-485-457-5', 336, '1997-04-01', 'English', '25th', 7, 5),
-('How to Win Friends',      NULL, 220.00, 40, 'Timeless principles for dealing with people',         '978-067-142-517-9', 288, '1936-10-01', 'English', '1st',  8, 4),
-('Sapiens',                 NULL, 350.00, 30, 'A brief history of humankind',                        '978-006-231-609-7', 443, '2011-01-01', 'English', '1st',  9, 7),
-('ประชาธิปไตยบนเส้นขนาน',  NULL, 260.00, 25, 'นิยายรางวัลซีไรต์ว่าด้วยการเมืองและมนุษยธรรม',    '978-974-484-003-3', 400, '1997-01-01', 'Thai',    '2nd',  4, 1),
-('The Alchemist',           NULL, 275.00, 55, 'A story about following your dreams',                 '978-006-231-500-7', 208, '1988-01-01', 'English', '1st', 10, 1),
-('1984',                    NULL, 230.00, 42, 'A dystopian novel about a totalitarian society',      '978-045-152-849-3', 328, '1949-06-08', 'English', '1st',  9, 1),
-('คู่มือ Python เบื้องต้น', NULL, 320.00, 20, 'เรียนรู้ภาษา Python สำหรับผู้เริ่มต้น',             '978-974-484-004-4', 360, '2022-03-01', 'Thai',    '1st',  5, 8);
+('Chua Fa Din Salai',              NULL, 195.00, 50, 'A historical novel set during World War II',                '978-974-484-001-1', 320, '2010-01-01', 'Thai',    '5th',  1, 1),
+('One Night in Paris',             NULL, 175.00, 35, 'A romantic love story set in Paris',                        '978-974-484-002-2', 280, '2015-06-01', 'Thai',    '3rd',  2, 1),
+('Atomic Habits',                  NULL, 295.00, 60, 'How to build good habits and break bad ones',               '978-073-521-122-5', 320, '2018-10-16', 'English', '1st',  6, 4),
+('Rich Dad Poor Dad',              NULL, 245.00, 45, 'What the rich teach their kids about money',                '978-194-485-457-5', 336, '1997-04-01', 'English', '25th', 7, 5),
+('How to Win Friends',             NULL, 220.00, 40, 'Timeless principles for dealing with people',               '978-067-142-517-9', 288, '1936-10-01', 'English', '1st',  8, 4),
+('Sapiens',                        NULL, 350.00, 30, 'A brief history of humankind',                              '978-006-231-609-7', 443, '2011-01-01', 'English', '1st',  9, 7),
+('Democracy on the Parallel Line', NULL, 260.00, 25, 'SEA Write Award novel about politics and humanity',         '978-974-484-003-3', 400, '1997-01-01', 'Thai',    '2nd',  4, 1),
+('The Alchemist',                  NULL, 275.00, 55, 'A story about following your dreams',                       '978-006-231-500-7', 208, '1988-01-01', 'English', '1st', 10, 1),
+('1984',                           NULL, 230.00, 42, 'A dystopian novel about a totalitarian society',            '978-045-152-849-3', 328, '1949-06-08', 'English', '1st',  9, 1),
+('Introduction to Python',         NULL, 320.00, 20, 'Learn Python programming for beginners',                    '978-974-484-004-4', 360, '2022-03-01', 'Thai',    '1st',  5, 8);
 
 -- book_author (10 rows)
 INSERT INTO book_author (book_id, author_id) VALUES
@@ -155,29 +155,29 @@ INSERT INTO book_author (book_id, author_id) VALUES
 
 -- users (10 rows)
 INSERT INTO users (first_name, last_name, email, password, phone, address) VALUES
-('สมชาย',   'ใจดี',       'somchai@email.com',   '1234', '0812345671', '123 ถ.สุขุมวิท กรุงเทพฯ'),
-('สมหญิง',  'รักดี',      'somying@email.com',   '1234', '0812345672', '456 ถ.รัชดา กรุงเทพฯ'),
-('วิชัย',    'มานะ',       'wichai@email.com',    '1234', '0812345673', '789 ถ.พระราม9 กรุงเทพฯ'),
-('นภา',     'สว่างใจ',    'napa@email.com',      '1234', '0812345674', '101 ถ.ลาดพร้าว กรุงเทพฯ'),
-('ธนา',     'มีทรัพย์',   'tana@email.com',      '1234', '0812345675', '202 ถ.งามวงศ์วาน นนทบุรี'),
-('อรทัย',   'แสงทอง',    'orathai@email.com',   '1234', '0812345676', '303 ถ.เพชรบุรี กรุงเทพฯ'),
-('ประยุทธ', 'เก่งมาก',    'prayut@email.com',    '1234', '0812345677', '404 ถ.รามคำแหง กรุงเทพฯ'),
-('มณี',     'งามเลิศ',    'manee@email.com',     '1234', '0812345678', '505 ถ.สาทร กรุงเทพฯ'),
-('ชัยชนะ',  'ดีเด่น',     'chaichana@email.com', '1234', '0812345679', '606 ถ.อโศก กรุงเทพฯ'),
-('พิมพ์',   'สวยงาม',    'pim@email.com',       '1234', '0812345670', '707 ถ.สีลม กรุงเทพฯ');
+('Somchai',   'Jaidee',     'somchai@email.com',   '1234', '0812345671', '123 Sukhumvit Rd, Bangkok'),
+('Somying',   'Rakdee',     'somying@email.com',   '1234', '0812345672', '456 Ratchada Rd, Bangkok'),
+('Wichai',    'Mana',       'wichai@email.com',    '1234', '0812345673', '789 Rama 9 Rd, Bangkok'),
+('Napa',      'Sawangjai',  'napa@email.com',      '1234', '0812345674', '101 Lat Phrao Rd, Bangkok'),
+('Tana',      'Misap',      'tana@email.com',      '1234', '0812345675', '202 Ngam Wong Wan Rd, Nonthaburi'),
+('Orathai',   'Saengthong', 'orathai@email.com',   '1234', '0812345676', '303 Phetchaburi Rd, Bangkok'),
+('Prayut',    'Kengmak',    'prayut@email.com',    '1234', '0812345677', '404 Ramkhamhaeng Rd, Bangkok'),
+('Manee',     'Ngamloet',   'manee@email.com',     '1234', '0812345678', '505 Sathorn Rd, Bangkok'),
+('Chaichana', 'Deeден',     'chaichana@email.com', '1234', '0812345679', '606 Asok Rd, Bangkok'),
+('Pim',       'Suayngam',   'pim@email.com',       '1234', '0812345670', '707 Silom Rd, Bangkok');
 
 -- admin (10 rows)
-INSERT INTO admin (admin_first_name, admin_last_name, username, password, email) VALUES
-('สมศักดิ์', 'ผู้ดูแล',    'admin',     '1234', 'admin@jubjub.com'),
-('วรรณา',   'จัดการ',     'wanna',     '1234', 'wanna@jubjub.com'),
-('ธีรพงษ์', 'ระบบ',       'theera',    '1234', 'theera@jubjub.com'),
-('นงนุช',   'ดูแลดี',     'nongnuch',  '1234', 'nongnuch@jubjub.com'),
-('กิตติ',   'บริหาร',     'kitti',     '1234', 'kitti@jubjub.com'),
-('ปราณี',   'รักงาน',     'pranee',    '1234', 'pranee@jubjub.com'),
-('สุรชัย',  'เชี่ยวชาญ',  'surachai',  '1234', 'surachai@jubjub.com'),
-('มยุรี',   'ใส่ใจ',      'mayuree',   '1234', 'mayuree@jubjub.com'),
-('อนันต์',  'ขยัน',       'anan',      '1234', 'anan@jubjub.com'),
-('ชนิดา',  'พิถีพิถัน',   'chanida',   '1234', 'chanida@jubjub.com');
+INSERT INTO admin (admin_first_name, admin_last_name, username, password_hash, email) VALUES
+('Somsak',    'Phudu',      'admin',     '1234', 'admin@jubjub.com'),
+('Wanna',     'Jadkan',     'wanna',     '1234', 'wanna@jubjub.com'),
+('Theerapong','Rabob',      'theera',    '1234', 'theera@jubjub.com'),
+('Nongnuch',  'Dudeedee',   'nongnuch',  '1234', 'nongnuch@jubjub.com'),
+('Kitti',     'Borihan',    'kitti',     '1234', 'kitti@jubjub.com'),
+('Pranee',    'Rakngarn',   'pranee',    '1234', 'pranee@jubjub.com'),
+('Surachai',  'Chiaochan',  'surachai',  '1234', 'surachai@jubjub.com'),
+('Mayuree',   'Saijai',     'mayuree',   '1234', 'mayuree@jubjub.com'),
+('Anan',      'Khayan',     'anan',      '1234', 'anan@jubjub.com'),
+('Chanida',   'Phithiphan', 'chanida',   '1234', 'chanida@jubjub.com');
 
 -- login_logs (10 rows)
 INSERT INTO login_logs (admin_id, login_time, status) VALUES
@@ -199,22 +199,22 @@ SHOW TABLES;
 SELECT * FROM publisher;
 SELECT * FROM category;
 SELECT * FROM author;
-SELECT * FROM book;
+SELECT book_title FROM book;
 SELECT * FROM book_author;
 SELECT * FROM users;
 SELECT * FROM admin;
 SELECT * FROM login_logs;
 
--- แก้ admin column
+-- Fix admin column
 ALTER TABLE admin CHANGE password_hash password VARCHAR(255) NOT NULL;
 
--- เพิ่ม tables ที่ขาด
+-- Add missing tables
 CREATE TABLE cart (
-    cart_id    INT AUTO_INCREMENT PRIMARY KEY,
-    user_id    INT NOT NULL,
-    book_id    INT NOT NULL,
-    quantity   INT NOT NULL DEFAULT 1 CHECK (quantity > 0),
-    added_at   DATETIME DEFAULT CURRENT_TIMESTAMP,
+    cart_id  INT AUTO_INCREMENT PRIMARY KEY,
+    user_id  INT NOT NULL,
+    book_id  INT NOT NULL,
+    quantity INT NOT NULL DEFAULT 1 CHECK (quantity > 0),
+    added_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(user_id),
     FOREIGN KEY (book_id) REFERENCES book(book_id)
 );
@@ -238,7 +238,8 @@ CREATE TABLE order_items (
     FOREIGN KEY (order_id) REFERENCES orders(order_id),
     FOREIGN KEY (book_id)  REFERENCES book(book_id)
 );
-	CREATE TABLE book_images (
+
+CREATE TABLE book_images (
     image_id   INT AUTO_INCREMENT PRIMARY KEY,
     book_id    INT NOT NULL,
     image_path VARCHAR(255) NOT NULL,
