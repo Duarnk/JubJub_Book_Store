@@ -1,0 +1,17 @@
+{
+  "name": "sec1_gr3_ws_src",
+  "version": "1.0.0",
+  "description": "JUBJUB BOOK STORE Web Services",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0",
+    "multer": "^2.1.1",
+    "mysql2": "^3.2.0"
+  }
+}
