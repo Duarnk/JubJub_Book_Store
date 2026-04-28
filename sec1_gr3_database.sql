@@ -205,8 +205,6 @@ SELECT * FROM users;
 SELECT * FROM admin;
 SELECT * FROM login_logs;
 
--- Fix admin column
-ALTER TABLE admin CHANGE password_hash password VARCHAR(255) NOT NULL;
 
 -- Add missing tables
 CREATE TABLE cart (
