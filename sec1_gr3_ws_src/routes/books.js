@@ -11,8 +11,8 @@ const router  = express.Router();
 // Configure multer — store files in uploads/books/
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, path.join(__dirname, '../../sec1_gr3_fe_src/images/books'));
-  },
+  cb(null, path.join(__dirname, '../uploads/books'));
+},
   filename: (req, file, cb) => {
     const ext = path.extname(file.originalname);
     cb(null, `book-${Date.now()}${ext}`);
@@ -338,7 +338,7 @@ router.post('/books/:id/upload', verifyAdmin, upload.single('cover'), async (req
     return res.status(400).json({ success: false, message: 'Please select an image file.' });
   }
 
-  const cover_image = `images/books/${req.file.filename}`;
+ const cover_image = `uploads/books/${req.file.filename}`;
 
   try {
     // Check if a primary image already exists
@@ -393,7 +393,7 @@ router.post('/books/:id/images', verifyAdmin, upload.single('image'), async (req
     return res.status(400).json({ success: false, message: 'Please select an image file.' });
   }
 
-  const image_path = `images/books/${req.file.filename}`;
+  const image_path = `uploads/books/${req.file.filename}`;
 
   try {
     await db.query(

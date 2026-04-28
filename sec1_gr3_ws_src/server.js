@@ -26,6 +26,9 @@ app.use('/api', booksRouter);
 app.use('/api', cartRouter);
 app.use('/api', ordersRouter);
 
+const path = require('path');
+
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 // Health check
 app.get('/', (req, res) => {
   res.json({ message: 'JUBJUB BOOK STORE API is running' });
